@@ -1,9 +1,18 @@
-### 🚀 Program 2
+## 🚀 Program 2
 
-Arduino program to blink an LED and implement a traffic signal system using d1gitalWrite() and pinMode() functions.
+### 📋 Objective
+Arduino program to blink an LED and implement a traffic signal system using `digitalWrite()` and `pinMode()` functions.
 
 ---
 
-circuit img: 
+### 🔧 Circuit Diagram
 
-Tinkedcad link: https://www.tinkercad.com/things/eZiWUlEoGof-traffic-light?sharecode=DKyZaq0rKqo9dfptGX5jwHNxEp6OPITUAH3H8CsAM4U
+![Traffic Light Circuit](https://github.com/poovarasansivakumar2003/IOT_Lab_Prog/blob/main/Program%202/Traffic%20Light.png?raw=true)
+
+---
+
+### 🌐 Interactive Simulation
+
+**Tinkercad Link:** [Traffic Light Simulation](https://www.tinkercad.com/things/eZiWUlEoGof-traffic-light?sharecode=DKyZaq0rKqo9dfptGX5jwHNxEp6OPITUAH3H8CsAM4U)
+
+---
