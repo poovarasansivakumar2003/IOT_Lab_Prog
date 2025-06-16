@@ -7,7 +7,7 @@ Arduino program to blink an LED and implement a traffic signal system using `dig
 
 ### 🔧 Circuit Diagram
 
-![Traffic Light Circuit](https://github.com/poovarasansivakumar2003/IOT_Lab_Prog/blob/main/Program%202/Traffic%20Light.png?raw=true)
+![Traffic Light Circuit](./Traffic%20Light.png)
 
 ---
 

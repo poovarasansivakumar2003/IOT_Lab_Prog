@@ -7,7 +7,7 @@ Arduino program to vary the intensity of LED based on the reading of Light Depen
 
 ### 🔧 Circuit Diagram
 
-![LDR-Based LED Intensity Control](https://github.com/poovarasansivakumar2003/IOT_Lab_Prog/blob/main/Program%203/LDR-Based%20LED%20Intensity%20Control.png?raw=true)
+![LDR-Based LED Intensity Control](./LDR-Based%20LED%20Intensity%20Control.png)
 
 ---
 

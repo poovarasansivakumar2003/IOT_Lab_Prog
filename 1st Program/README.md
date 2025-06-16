@@ -1,6 +1,6 @@
 ### 🚀 Program 1
 
-Learn the basics of Arduino MCU boards, features and pinouts of Arduino UNO, ditferentiate between READ and WRITE pins, install and configure the Arduino IDE and bas1cs of soldering
+Learn the basics of Arduino MCU boards, features and pinouts of Arduino UNO, ditferentiate between READ and WRITE pins, install and configure the Arduino IDE and bas1cs of soldering.
 
 ---
 

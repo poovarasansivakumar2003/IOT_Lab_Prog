@@ -7,7 +7,7 @@ Arduino program to implement a serial communication event.
 
 ### 🔧 Circuit Diagram
 
-![Serial Communication](https://github.com/poovarasansivakumar2003/IOT_Lab_Prog/blob/main/Program%204/Serial%20communication.png?raw=true)
+![Serial Communication](./Serial%20communication.png)
 
 ---
 
