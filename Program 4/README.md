@@ -7,7 +7,7 @@ Arduino program to toggle LED by pressing a button and to implement a switch deb
 
 ### 🔧 Circuit Diagram
 
-![Switch debounce circuit]()
+![Switch debounce circuit](https://github.com/poovarasansivakumar2003/IOT_Lab_Prog/blob/main/Program%204/Switch%20debounce%20circuit.png?raw=true)
 
 ---
 
