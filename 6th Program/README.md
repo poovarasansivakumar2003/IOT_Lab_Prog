@@ -5,14 +5,23 @@ Arduino program to implement a temperature and humidity sensor and switch ON an 
 
 ---
 
+### Prerequisite
+
+- First, install the DHT sensor library.
+- Go to Tools > Manage Libraries.
+- Search for `DHT sensor library` by Adafruit and install it.
+- Also install the Adafruit Unified Sensor Library if prompted.
+
+---
+
 ### 🔧 Circuit Diagram
 
-![]()
+![Temperature and Humidity](./Temperature%20and%20humidity.png)
 
 ---
 
 ### 🌐 Interactive Simulation
 
-**Tinkercad Link:** []()
+**Wokwi Link:** [Temperature and Humidity](https://wokwi.com/projects/434192522603539457)
 
 ---

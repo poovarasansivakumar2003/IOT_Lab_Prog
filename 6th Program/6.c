@@ -1,34 +1,37 @@
 #include "DHT.h"
 #define DHTPIN 2
 #define DHTTYPE DHT11
+#define LEDPIN 13
+#define TEMP_THRESHOLD 2
 
 DHT dht(DHTPIN, DHTTYPE);
-
-const int ledPin = 13;
-const float tempThreshold = 30.0;
 
 void setup() {
   Serial.begin(9600);
   dht.begin();
-  pinMode(ledPin, OUTPUT);
+  pinMode(LEDPIN, OUTPUT);
 }
 
 void loop() {
-  delay(2000);
-  float temp = dht.readTemperature();
-  float hum = dht.readHumidity();
-  if (isnan(temp) || isnan(hum)) {
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
+  if (isnan(temperature) || isnan(humidity)) {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
+
   Serial.print("Temperature: ");
-  Serial.print(temp);
-  Serial.print(" °C | Humidity: ");
-  Serial.print(hum);
+  Serial.print(temperature);
+  Serial.print(" °C, Humidity: ");
+  Serial.print(humidity);
   Serial.println(" %");
-  if (temp > tempThreshold) {
-    digitalWrite(ledPin, HIGH);
+
+  if (temperature > TEMP_THRESHOLD) {
+    digitalWrite(LEDPIN, HIGH);
   } else {
-    digitalWrite(ledPin, LOW);
+    digitalWrite(LEDPIN, LOW);
   }
+
+  delay(2000);
 }
