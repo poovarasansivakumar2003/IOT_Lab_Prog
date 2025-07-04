@@ -19,7 +19,7 @@ Arduino program to implement a GSM module and send SMS using some carrier to a c
 | VCC            | 3.7–4.2V (external, **not 5V**) |
 | GND            | GND                             |
 | TX             | D10 (software RX)               |
-| RX             | D9 (software TX)                |
+| RX             | D11 (software TX)               |
 
 Important: Use a voltage divider on Arduino TX → GSM RX to avoid overvolting (Arduino TX is 5V; GSM RX is 2.8V–3.3V tolerant).
 
