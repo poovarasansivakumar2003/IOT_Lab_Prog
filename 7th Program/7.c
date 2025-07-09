@@ -1,45 +1,28 @@
 #include <Stepper.h>
 
-// --- Stepper Motor Settings ---
-const int stepsPerRevolution = 2048; // adjust for your stepper
-Stepper myStepper(stepsPerRevolution, 4, 6, 5, 7); // IN1-IN4
+const int motorpin = 2;  // DC motor control pin (ON/OFF)
+const int stepsPerRevolution = 2048;  // For 28BYJ-48 stepper motor
 
-// --- DC Motor Pins ---
-const int motorPin1 = 8;   // IN1
-const int motorPin2 = 9;   // IN2
-const int enablePin = 10;  // PWM (EN1)
+// Keep your working pin order here
+Stepper mystepper(stepsPerRevolution, 8, 10, 9, 11);  
 
 void setup() {
-  // DC Motor pins
-  pinMode(motorPin1, OUTPUT);
-  pinMode(motorPin2, OUTPUT);
-  pinMode(enablePin, OUTPUT);
-
-  // Stepper Motor speed (RPM)
-  myStepper.setSpeed(10); // Adjust as needed
-
-  Serial.begin(9600);
+  pinMode(motorpin, OUTPUT);      // DC Motor control pin
+  mystepper.setSpeed(10);         // Set speed in RPM for stepper motor
 }
 
 void loop() {
-  // --- Drive DC Motor Forward ---
-  digitalWrite(motorPin1, HIGH);
-  digitalWrite(motorPin2, LOW);
-  analogWrite(enablePin, 200); // Speed (0-255)
+  // Run DC motor for 0.5 sec
+  digitalWrite(motorpin, HIGH);
+  delay(500);
+  digitalWrite(motorpin, LOW);
+  delay(500);
 
-  delay(2000); // Run DC motor for 2 seconds
-
-  // --- Stop DC Motor ---
-  analogWrite(enablePin, 0);
+  // Rotate stepper motor one full revolution clockwise
+  mystepper.step(stepsPerRevolution);
   delay(1000);
 
-  // --- Stepper Motor Forward ---
-  Serial.println("Stepper forward");
-  myStepper.step(stepsPerRevolution); // 1 full revolution
-  delay(1000);
-
-  // --- Stepper Motor Backward ---
-  Serial.println("Stepper backward");
-  myStepper.step(-stepsPerRevolution);
+  // Rotate stepper motor one full revolution counter-clockwise (REVERSE)
+  mystepper.step(-stepsPerRevolution);
   delay(1000);
 }

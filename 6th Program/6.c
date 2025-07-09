@@ -2,7 +2,7 @@
 #define DHTPIN 2
 #define DHTTYPE DHT11
 #define LEDPIN 13
-#define TEMP_THRESHOLD 2
+#define TEMP_THRESHOLD 20
 
 DHT dht(DHTPIN, DHTTYPE);
 
