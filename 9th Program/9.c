@@ -1,69 +1,56 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include <OneWire.h>
-#include <DallasTemperature.h>
-#include <RTClib.h>
+#include <DHT.h>
 
-// LCD setup (address 0x27 or 0x3F usually works, 16 columns, 2 rows)
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+// LCD setup
+LiquidCrystal_I2C lcd(0x27, 16, 2); // LCD I2C address might be 0x3F for some displays
 
-// Temperature sensor setup
-#define ONE_WIRE_BUS 2
-OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);
+// DHT setup
+#define DHTPIN 2       // DHT11 data pin connected to Arduino pin 2
+#define DHTTYPE DHT11  // Sensor type
+DHT dht(DHTPIN, DHTTYPE);
 
-// RTC setup
-RTC_DS3231 rtc;
+String dateTime = "";
 
 void setup() {
-  // Initialize serial and components
-  Serial.begin(9600);
-  lcd.init();
+  lcd.begin();
   lcd.backlight();
+  Serial.begin(9600);
+  dht.begin();
 
-  sensors.begin();
-  if (!rtc.begin()) {
-    lcd.print("RTC Not Found");
-    while (1); // Halt
-  }
-
-  if (rtc.lostPower()) {
-    // Set time to compilation time if RTC lost power
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-  }
+  lcd.setCursor(0, 0);
+  lcd.print("Waiting for time");
 }
 
 void loop() {
-  sensors.requestTemperatures();
-  float tempC = sensors.getTempCByIndex(0);
+  if (Serial.available()) {
+    dateTime = Serial.readStringUntil('\n');  // Read incoming date/time from Python
 
-  DateTime now = rtc.now();
+    // Display Date and Time
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(dateTime.substring(0, 10));  // dd-mm-yyyy
+    lcd.setCursor(0, 1);
+    lcd.print(dateTime.substring(11));     // HH:MM:SS
 
-  lcd.clear();
-  
-  // First row: Temp and time
-  lcd.setCursor(0, 0);
-  lcd.print("T:");
-  lcd.print(tempC, 1);
-  lcd.print((char)223); // Degree symbol
-  lcd.print("C");
+    delay(2000);  // Display time for 2 seconds
 
-  lcd.setCursor(9, 0);
-  if (now.hour() < 10) lcd.print("0");
-  lcd.print(now.hour());
-  lcd.print(":");
-  if (now.minute() < 10) lcd.print("0");
-  lcd.print(now.minute());
+    // Read DHT11 sensor values
+    float temperature = dht.readTemperature();  // °C
+    float humidity = dht.readHumidity();
 
-  // Second row: Date
-  lcd.setCursor(0, 1);
-  if (now.day() < 10) lcd.print("0");
-  lcd.print(now.day());
-  lcd.print("/");
-  if (now.month() < 10) lcd.print("0");
-  lcd.print(now.month());
-  lcd.print("/");
-  lcd.print(now.year());
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("T:");
+    lcd.print(isnan(temperature) ? "N/A" : String(temperature, 1));
+    lcd.print((char)223); // Degree symbol
+    lcd.print("C");
 
-  delay(1000); // Update every second
+    lcd.setCursor(0, 1);
+    lcd.print("H:");
+    lcd.print(isnan(humidity) ? "N/A" : String(humidity, 0));
+    lcd.print("%");
+
+    delay(3000);  // Display temp/humidity for 3 seconds
+  }
 }

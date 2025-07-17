@@ -156,5 +156,3 @@ Soldering is the process of joining two or more electronic components using melt
 * Do **not** touch the hot iron.
 * Wear safety goggles.
 * Wash hands after soldering (especially when using leaded solder).
-
----

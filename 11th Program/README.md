@@ -9,7 +9,7 @@ Learn the basics of Raspberry Pi, features, pinout and configuration.
 
 The **Raspberry Pi** is a **credit card-sized single-board computer** developed by the Raspberry Pi Foundation. It's designed to promote basic computer science teaching in schools and developing countries.
 
-![Raspberry Pi 4 Model B](https://www.raspberrypi.com/app/uploads/2022/02/RASPBERRY_PI_4_MODEL_B__PRESS_PAGE.jpg)
+![Raspberry Pi 4 Model B](https://www.elepcb.com/wp-content/uploads/2024/05/Parts-of-Respberry-Pi.png)
 *Raspberry Pi 4 Model B - Image credit: Raspberry Pi Foundation*
 
 ### Primary Uses:

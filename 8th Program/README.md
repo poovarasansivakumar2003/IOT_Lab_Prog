@@ -14,5 +14,3 @@ Arduino program to implement an ultrasonic sensor to measure distance to an obst
 ### 🌐 Interactive Simulation
 
 **Tinkercad Link:** [Ultrasonic Sensor](https://www.tinkercad.com/things/bwViUEaL79p-ultrasonic-sensor-?sharecode=myRTfbjcGAqkN1BLuWSU1WYIDSVPPrR2oipJZayzYKw)
-
----
