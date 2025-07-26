@@ -5,13 +5,22 @@ Arduino program to implement a 16x2 LCD alphanumeric display and display tempera
 
 ---
 
-### Prerequisite
+### 🛠️ Prerequisites
 
-- First, install the Stepper Library.
-- Go to Sketch > Include Library > Manage Libraries...
-- Search for `DHT sensor library` by Adafruit and install it.
-`Also, install Adafruit Unified Sensor when prompted.`
-- Search for `LiquidCrystal_I2C` by Frank de Brabander and install it.
+Before starting, ensure you have the following libraries installed in your Arduino IDE:
+
+#### 1. DHT Sensor Library (by Adafruit)
+- Open Arduino IDE.
+- Go to **Sketch > Include Library > Manage Libraries...**
+- Search for **"DHT sensor library"** by Adafruit and click **Install**.
+- When prompted, also install the **Adafruit Unified Sensor** library.
+
+#### 2. LiquidCrystal I2C Library
+- Download the ZIP file: [LiquidCrystal Library](./Arduino-LiquidCrystal-I2C-library-master.zip)
+- In Arduino IDE, go to **Sketch > Include Library > Add .ZIP Library...**
+- Select the downloaded ZIP file to install.
+
+After installation, both libraries should be available under **Sketch > Include Library**.
 
 ---
 
