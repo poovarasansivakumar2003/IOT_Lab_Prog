@@ -7,20 +7,26 @@ Arduino program to implement a 16x2 LCD alphanumeric display and display tempera
 
 ### 🛠️ Prerequisites
 
-Before starting, ensure you have the following libraries installed in your Arduino IDE:
+Before you begin, make sure you have the following libraries installed in your Arduino IDE:
 
 #### 1. DHT Sensor Library (by Adafruit)
-- Open Arduino IDE.
-- Go to **Sketch > Include Library > Manage Libraries...**
+- Open the Arduino IDE.
+- Navigate to **Sketch > Include Library > Manage Libraries...**
 - Search for **"DHT sensor library"** by Adafruit and click **Install**.
 - When prompted, also install the **Adafruit Unified Sensor** library.
 
 #### 2. LiquidCrystal I2C Library
 - Download the ZIP file: [LiquidCrystal Library](./Arduino-LiquidCrystal-I2C-library-master.zip)
-- In Arduino IDE, go to **Sketch > Include Library > Add .ZIP Library...**
+- In the Arduino IDE, go to **Sketch > Include Library > Add .ZIP Library...**
 - Select the downloaded ZIP file to install.
 
-After installation, both libraries should be available under **Sketch > Include Library**.
+After installation, both libraries should appear under **Sketch > Include Library**.
+
+Additionally, install the Python `pyserial` package by running `pip install pyserial` in your terminal or command prompt to enable system time communication.
+
+Double-check that the correct port is selected in the Arduino IDE under **Tools > Port**.
+
+If you encounter a `PermissionError` or `SerialException`, ensure that no other program (such as the Arduino Serial Monitor) is using the port.
 
 ---
 
@@ -42,12 +48,8 @@ After installation, both libraries should be available under **Sketch > Include 
 |---------|-------------|-----------------|
 | VCC     | 5V          | Power           |
 | GND     | GND         | Ground          |
-| SDA     | A4          | I2C Data line   |
-| SCL     | A5          | I2C Clock line  |
-
-##### 📌 For Arduino Uno, I2C pins are:  
-- SDA → A4  
-- SCL → A5
+| SDA     | SDA         | I2C Data line   |
+| SCL     | SCL         | I2C Clock line  |
 
 ---
 

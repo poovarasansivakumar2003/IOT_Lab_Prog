@@ -1,11 +1,8 @@
-from gettext import install
-import pip
-pip.main(['install', 'pyserial'])
 import serial
 import time
 from datetime import datetime
 
-ser = serial.Serial('COM7', 9600)  # Replace with your Arduino port
+ser = serial.Serial('COM17', 9600)  # Replace with your Arduino port
 time.sleep(2)  # Wait for Arduino to reset
 
 while True:
