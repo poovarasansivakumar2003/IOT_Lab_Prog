@@ -15,6 +15,6 @@ void loop() {
    }
   else {
     digitalWrite(ledPin, LOW);
-    Serial.println("LDR is 	BRIGHT, LED is OFF");
+    Serial.println("LDR is BRIGHT, LED is OFF");
   }
 }
