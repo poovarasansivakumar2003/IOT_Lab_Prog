@@ -13,4 +13,4 @@ Arduino program to implement a serial communication event.
 
 ### 🌐 Interactive Simulation
 
-**Tinkercad Link:** [Serial Communication](https://www.tinkercad.com/things/8OGUtXeVsEQ-serial-communication?sharecode=_v8un9o3L-xxWu8cCBVcJuiGKQdnnzzcTPXM9ykOlnY)
+**Tinkercad Link:** [Serial Communication](https://www.tinkercad.com/things/eXOR1BsH5Bh-serial-comminication?sharecode=WSFft4aTu4_coQA9EXHYrd966NnECrF_vJy45EtnX8Y)
