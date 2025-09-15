@@ -4,134 +4,140 @@
 Program to implement MQTT protocol and publish some data. 
 
 ---
-To implement the **MQTT protocol** and **publish data** using an Arduino-compatible device, you'll typically use a **Wi-Fi-enabled microcontroller**, such as:
 
-* **ESP8266** (e.g., NodeMCU)
-* **ESP32**
-
-These boards support **Wi-Fi**, making them ideal for **MQTT** communication with a broker like **Mosquitto**, **HiveMQ**, or **Adafruit IO**.
+Perfect 🚀 You’ve shared a **Publisher–Subscriber** example using **MQTT protocol** with Python and HiveMQ’s public broker. Let me explain everything in detail and also tell you how to run it step by step.
 
 ---
 
-## ✅ Requirements
+# 🔹 What is MQTT?
 
-### 🔧 Hardware
+* **MQTT (Message Queuing Telemetry Transport)** is a **lightweight publish–subscribe messaging protocol** commonly used in **IoT**.
+* It involves:
 
-* **ESP8266** (NodeMCU) or **ESP32**
-* USB cable and Arduino IDE
-
-### 📦 Libraries (Install via Library Manager)
-
-1. `PubSubClient` – MQTT client library
-2. `ESP8266WiFi` or `WiFi` (for ESP32)
+  1. **Broker** – central server that manages communication (here: `broker.hivemq.com`).
+  2. **Publisher** – sends messages to a topic.
+  3. **Subscriber** – listens for messages from a topic.
 
 ---
 
-## ✅ Arduino Code Example – Publish Data Using MQTT
+# 🔹 Explanation of the Code
 
-This example publishes temperature (simulated) every 5 seconds to an MQTT topic.
+### **1. Publisher Code**
 
----
+```python
+import paho.mqtt.client as mqtt
+from random import randrange
+import time
 
-### 📝 Code (for ESP8266/NodeMCU)
+mqtt_broker = "broker.hivemq.com"
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1, "number-out")
+client.connect(mqtt_broker)
 
+while True:
+    num = randrange(1, 11)  # generate random number 1–10
+    client.publish("random number", num)  # publish to topic "random number"
+    print(f"The number {num} is published as random number")
+    time.sleep(1)  # wait for 1 second
 ```
-#include <ESP8266WiFi.h>
-#include <PubSubClient.h>
 
-// WiFi credentials
-const char* ssid = "YOUR_WIFI_SSID";
-const char* password = "YOUR_WIFI_PASSWORD";
+✅ What it does:
 
-// MQTT broker settings
-const char* mqtt_server = "broker.hivemq.com"; // public broker
-const int mqtt_port = 1883;
-const char* mqtt_topic = "test/temperature";
+* Connects to **HiveMQ broker**.
+* Every **1 second**, generates a random number between 1 and 10.
+* Publishes it to the topic `"random number"`.
+* Prints confirmation on the console.
 
-WiFiClient espClient;
-PubSubClient client(espClient);
+---
 
-void setup_wifi() {
-  delay(10);
-  Serial.println("Connecting to WiFi...");
-  WiFi.begin(ssid, password);
+### **2. Subscriber Code**
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
+```python
+import paho.mqtt.client as mqtt
 
-  Serial.println("\nWiFi connected!");
-  Serial.print("IP Address: ");
-  Serial.println(WiFi.localIP());
-}
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected with result code {rc}")
+    client.subscribe("random number")  # subscribe to topic
 
-void reconnect() {
-  // Loop until reconnected
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    if (client.connect("ESP8266Client")) {
-      Serial.println("connected");
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 sec");
-      delay(5000);
-    }
-  }
-}
+def on_message(client, userdata, msg):
+    print(f"Received message: {msg.payload.decode()} on topic: {msg.topic}")
 
-void setup() {
-  Serial.begin(115200);
-  setup_wifi();
-  client.setServer(mqtt_server, mqtt_port);
-}
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_message = on_message
 
-void loop() {
-  if (!client.connected()) {
-    reconnect();
-  }
-  client.loop();
+client.connect("broker.hivemq.com", 1883, 60)
+client.loop_forever()
+```
 
-  // Simulate temperature reading
-  float temp = random(20, 30) + random(0, 100) / 100.0;
+✅ What it does:
 
-  char message[50];
-  snprintf(message, 50, "Temperature: %.2f °C", temp);
+* Connects to **HiveMQ broker** at port `1883`.
+* When connected, subscribes to `"random number"`.
+* Whenever a new number is published, `on_message()` prints it.
+* Runs forever listening to messages.
 
-  Serial.print("Publishing: ");
-  Serial.println(message);
-  client.publish(mqtt_topic, message);
+---
 
-  delay(5000); // publish every 5 seconds
-}
+# 🔹 How to Run This Code
+
+### **Step 1: Install Paho MQTT**
+
+In terminal (Linux/macOS) or CMD/PowerShell (Windows):
+
+```bash
+pip install paho-mqtt
 ```
 
 ---
 
-## 📌 Notes
+### **Step 2: Save Codes Separately**
 
-* **MQTT Broker**: You can use free brokers like:
-
-  * `broker.hivemq.com`
-  * `test.mosquitto.org`
-  * Your own Mosquitto server (on PC/Raspberry Pi)
-* **Client ID** must be unique per client connection.
-* Use **MQTT.fx** or **mosquitto\_sub** to view messages.
+1. **publisher.py** → the first block (random number publisher)
+2. **subscriber.py** → the second block (listener)
 
 ---
 
+### **Step 3: Run Both Scripts**
 
+* Open **two terminals** (or two tabs).
 
+* Run publisher in one:
 
-### 🔧 Circuit Diagram
+  ```bash
+  python publisher.py
+  ```
 
-![]()
+  Output:
+
+  ```
+  The number 5 is published as random number
+  The number 8 is published as random number
+  ...
+  ```
+
+* Run subscriber in another:
+
+  ```bash
+  python subscriber.py
+  ```
+
+  Output:
+
+  ```
+  Connected with result code 0
+  Received message: 5 on topic: random number
+  Received message: 8 on topic: random number
+  ...
+  ```
 
 ---
 
-### 🌐 Interactive Simulation
+# ✅ Summary
 
-**Tinkercad Link:** []()
+* `publisher.py` → sends random numbers every second to **HiveMQ broker**.
+* `subscriber.py` → receives and prints those numbers.
+* They communicate via the MQTT topic `"random number"`.
 
 ---
+
+👉 Do you want me to also show you how to **visualize these messages live in HiveMQ’s online MQTT Web Client** (so you can see without writing subscriber code)?
